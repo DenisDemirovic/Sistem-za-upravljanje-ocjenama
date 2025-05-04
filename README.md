@@ -9,8 +9,7 @@ FUNKCIONALNOSTI:
 4.	Izračunavanje i prikaz prosječne ocjene svakog studenta
 5.	Brisanje studenta iz sistema
 6.	Pretraga studenta po broju indeksa
-7.	Čuvanje i učitavanje podataka iz fajla "studenti.txt"
-8.	Izlaz iz programa
+7.	Izlaz iz programa
 
 TEHNOLOGIJE:
 -	C# programski jezik (.NET Console Application)
