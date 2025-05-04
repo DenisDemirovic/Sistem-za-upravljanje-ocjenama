@@ -1,0 +1,253 @@
+using System;
+using System.Collections.Generic;
+
+namespace Sistem_za_upravljanje_ocjenama
+{
+    class Student
+    {
+        public string Ime;
+        public string Prezime;
+        public string BrojIndeksa;
+        public List<int> Ocjene = new List<int>();
+    }
+
+    internal class Program
+    {
+        static List<Student> studenti = new List<Student>();
+
+        static void Main(string[] args)
+        {
+            int izbor = -1;
+
+            while (izbor != 0)
+            {
+                Console.Clear();
+                Console.WriteLine("=============================================");
+                Console.WriteLine("        SISTEM ZA UPRAVLJANJE OCJENAMA       ");
+                Console.WriteLine("=============================================");
+                Console.WriteLine();
+                Console.WriteLine("1. Dodaj novog studenta");
+                Console.WriteLine("2. Dodaj ocjenu studentu");
+                Console.WriteLine("3. Prikaži sve studente");
+                Console.WriteLine("4. Prikaži prosječne ocjene");
+                Console.WriteLine("5. Obriši studenta");
+                Console.WriteLine("6. Pretraži po indeksu");
+                Console.WriteLine("0. Izlaz iz programa");
+                Console.WriteLine("---------------------------------------------");
+                Console.WriteLine("Ukupno studenata: " + studenti.Count + " | Prosječna ocjena: " + IzracunajProsjekSvih());
+                Console.WriteLine("---------------------------------------------");
+                Console.Write("Unesite izbor (0-6): ");
+
+                string unos = Console.ReadLine();
+                int.TryParse(unos, out izbor);
+
+                if (izbor == 1)
+                {
+                    DodajStudenta();
+                }
+                else if (izbor == 2)
+                {
+                    DodajOcjenu();
+                }
+                else if (izbor == 3)
+                {
+                    PrikaziStudente();
+                }
+                else if (izbor == 4)
+                {
+                    PrikaziProsjecneOcjene();
+                }
+                else if (izbor == 5)
+                {
+                    ObrisiStudenta();
+                }
+                else if (izbor == 6)
+                {
+                    PretraziStudenta();
+                }
+                else if (izbor == 0)
+                {
+                    Console.WriteLine("Izlaz iz programa...");
+                }
+                else
+                {
+                    Console.WriteLine("Pogrešan unos. Pokušajte ponovo.");
+                }
+
+                Console.WriteLine("Pritisnite Enter za nastavak...");
+                Console.ReadLine();
+            }
+        }
+
+        static void DodajStudenta()
+        {
+            // Dodavanje novog studenta
+            Student noviStudent = new Student();
+
+            Console.Write("Unesite ime: ");
+            noviStudent.Ime = Console.ReadLine();
+
+            Console.Write("Unesite prezime: ");
+            noviStudent.Prezime = Console.ReadLine();
+
+            Console.Write("Unesite broj indeksa: ");
+            noviStudent.BrojIndeksa = Console.ReadLine();
+
+            studenti.Add(noviStudent);
+
+            Console.WriteLine("Student uspješno dodan!");
+        }
+
+        static void DodajOcjenu()
+        {
+            // Dodavanje ocjene studentu
+            Console.Write("Unesite broj indeksa studenta: ");
+            string indeks = Console.ReadLine();
+
+            Student studentNadjen = null;
+            foreach (Student s in studenti)
+            {
+                if (s.BrojIndeksa == indeks)
+                {
+                    studentNadjen = s;
+                    break;
+                }
+            }
+
+            if (studentNadjen != null)
+            {
+                Console.Write("Unesite ocjenu (6-10): ");
+                int ocjena;
+                if (int.TryParse(Console.ReadLine(), out ocjena))
+                {
+                    if (ocjena >= 6 && ocjena <= 10)
+                    {
+                        studentNadjen.Ocjene.Add(ocjena);
+                        Console.WriteLine("Ocjena dodana.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ocjena mora biti između 6 i 10.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Unos nije broj.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Student nije pronađen.");
+            }
+        }
+
+        static void PrikaziStudente()
+        {
+            // Prikaz svih studenata
+            foreach (Student s in studenti)
+            {
+                Console.WriteLine("Indeks: " + s.BrojIndeksa + " | " + s.Ime + " " + s.Prezime + " | Ocjene: " + string.Join(", ", s.Ocjene));
+            }
+        }
+
+        static void PrikaziProsjecneOcjene()
+        {
+            // Prikaz prosječnih ocjena
+            foreach (Student s in studenti)
+            {
+                if (s.Ocjene.Count > 0)
+                {
+                    int suma = 0;
+                    foreach (int ocjena in s.Ocjene)
+                    {
+                        suma += ocjena;
+                    }
+                    double prosjek = (double)suma / s.Ocjene.Count;
+                    Console.WriteLine("Indeks: " + s.BrojIndeksa + " | " + s.Ime + " " + s.Prezime + " | Prosjek: " + prosjek.ToString("F2"));
+                }
+                else
+                {
+                    Console.WriteLine("Indeks: " + s.BrojIndeksa + " | " + s.Ime + " " + s.Prezime + " | Nema ocjena.");
+                }
+            }
+        }
+
+        static void ObrisiStudenta()
+        {
+            // Brisanje studenta
+            Console.Write("Unesite broj indeksa studenta za brisanje: ");
+            string indeks = Console.ReadLine();
+
+            Student studentZaBrisanje = null;
+            foreach (Student s in studenti)
+            {
+                if (s.BrojIndeksa == indeks)
+                {
+                    studentZaBrisanje = s;
+                    break;
+                }
+            }
+
+            if (studentZaBrisanje != null)
+            {
+                studenti.Remove(studentZaBrisanje);
+                Console.WriteLine("Student obrisan.");
+            }
+            else
+            {
+                Console.WriteLine("Student nije pronađen.");
+            }
+        }
+
+        static void PretraziStudenta()
+        {
+            // Pretraga studenta po indeksu
+            Console.Write("Unesite broj indeksa za pretragu: ");
+            string indeks = Console.ReadLine();
+
+            Student nadjenStudent = null;
+            foreach (Student s in studenti)
+            {
+                if (s.BrojIndeksa == indeks)
+                {
+                    nadjenStudent = s;
+                    break;
+                }
+            }
+
+            if (nadjenStudent != null)
+            {
+                Console.WriteLine("Indeks: " + nadjenStudent.BrojIndeksa + " | " + nadjenStudent.Ime + " " + nadjenStudent.Prezime + " | Ocjene: " + string.Join(", ", nadjenStudent.Ocjene));
+            }
+            else
+            {
+                Console.WriteLine("Student nije pronađen.");
+            }
+        }
+
+        static double IzracunajProsjekSvih()
+        {
+            // Izračunavanje ukupnog prosjeka svih ocjena
+            int suma = 0;
+            int brojOcjena = 0;
+
+            foreach (Student s in studenti)
+            {
+                foreach (int ocjena in s.Ocjene)
+                {
+                    suma += ocjena;
+                    brojOcjena++;
+                }
+            }
+
+            if (brojOcjena > 0)
+            {
+                return (double)suma / brojOcjena;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+}
