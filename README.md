@@ -17,10 +17,9 @@ TEHNOLOGIJE:
 
 KORIŠTENI KONCEPTI:
 -	Klase i objekti
--	Liste (List<T>)
--	Petlje i uslovi (if, foreach, while)
--	Funkcije (metode)
--	Parsiranje stringova (Split, TryParse)
+-	Liste (List<Student>)
+-	Petlje i uslovi (while, if, switch)
+-	Funkcije (metode za dodavanje, brisanje, pretragu)
 
 POKRETANJE APLIKACIJE:
 1.	Otvoriti projekt u Visual Studio-u
