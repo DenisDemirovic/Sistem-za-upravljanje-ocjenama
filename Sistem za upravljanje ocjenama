@@ -41,37 +41,32 @@ namespace Sistem_za_upravljanje_ocjenama
                 string unos = Console.ReadLine();
                 int.TryParse(unos, out izbor);
 
-                if (izbor == 1)
+                switch (izbor)
                 {
-                    DodajStudenta();
-                }
-                else if (izbor == 2)
-                {
-                    DodajOcjenu();
-                }
-                else if (izbor == 3)
-                {
-                    PrikaziStudente();
-                }
-                else if (izbor == 4)
-                {
-                    PrikaziProsjecneOcjene();
-                }
-                else if (izbor == 5)
-                {
-                    ObrisiStudenta();
-                }
-                else if (izbor == 6)
-                {
-                    PretraziStudenta();
-                }
-                else if (izbor == 0)
-                {
-                    Console.WriteLine("Izlaz iz programa...");
-                }
-                else
-                {
-                    Console.WriteLine("Pogrešan unos. Pokušajte ponovo.");
+                    case 1:
+                        DodajStudenta();
+                        break;
+                    case 2:
+                        DodajOcjenu();
+                        break;
+                    case 3:
+                        PrikaziStudente();
+                        break;
+                    case 4:
+                        PrikaziProsjecneOcjene();
+                        break;
+                    case 5:
+                        ObrisiStudenta();
+                        break;
+                    case 6:
+                        PretraziStudenta();
+                        break;
+                    case 0:
+                        Console.WriteLine("Izlaz iz programa...");
+                        break;
+                    default:
+                        Console.WriteLine("Pogrešan unos. Pokušajte ponovo.");
+                        break;
                 }
 
                 Console.WriteLine("Pritisnite Enter za nastavak...");
@@ -81,7 +76,6 @@ namespace Sistem_za_upravljanje_ocjenama
 
         static void DodajStudenta()
         {
-            // Dodavanje novog studenta
             Student noviStudent = new Student();
 
             Console.Write("Unesite ime: ");
@@ -100,7 +94,6 @@ namespace Sistem_za_upravljanje_ocjenama
 
         static void DodajOcjenu()
         {
-            // Dodavanje ocjene studentu
             Console.Write("Unesite broj indeksa studenta: ");
             string indeks = Console.ReadLine();
 
@@ -143,16 +136,17 @@ namespace Sistem_za_upravljanje_ocjenama
 
         static void PrikaziStudente()
         {
-            // Prikaz svih studenata
             foreach (Student s in studenti)
             {
-                Console.WriteLine("Indeks: " + s.BrojIndeksa + " | " + s.Ime + " " + s.Prezime + " | Ocjene: " + string.Join(", ", s.Ocjene));
+                Console.WriteLine("Index: " + s.BrojIndeksa +
+                    " | Ime: " + s.Ime +
+                    " | Prezime: " + s.Prezime +
+                    " | Ocjene: " + string.Join(", ", s.Ocjene));
             }
         }
 
         static void PrikaziProsjecneOcjene()
         {
-            // Prikaz prosječnih ocjena
             foreach (Student s in studenti)
             {
                 if (s.Ocjene.Count > 0)
@@ -174,7 +168,6 @@ namespace Sistem_za_upravljanje_ocjenama
 
         static void ObrisiStudenta()
         {
-            // Brisanje studenta
             Console.Write("Unesite broj indeksa studenta za brisanje: ");
             string indeks = Console.ReadLine();
 
@@ -201,33 +194,27 @@ namespace Sistem_za_upravljanje_ocjenama
 
         static void PretraziStudenta()
         {
-            // Pretraga studenta po indeksu
             Console.Write("Unesite broj indeksa za pretragu: ");
             string indeks = Console.ReadLine();
 
-            Student nadjenStudent = null;
-            foreach (Student s in studenti)
-            {
-                if (s.BrojIndeksa == indeks)
-                {
-                    nadjenStudent = s;
-                    break;
-                }
-            }
+            Student s = studenti.Find(x => x.BrojIndeksa == indeks);
 
-            if (nadjenStudent != null)
+            if (s != null)
             {
-                Console.WriteLine("Indeks: " + nadjenStudent.BrojIndeksa + " | " + nadjenStudent.Ime + " " + nadjenStudent.Prezime + " | Ocjene: " + string.Join(", ", nadjenStudent.Ocjene));
+                Console.WriteLine("Indeks: " + s.BrojIndeksa +
+                                  " | Ime: " + s.Ime +
+                                  " | Prezime: " + s.Prezime +
+                                  " | Ocjene: " + string.Join(", ", s.Ocjene));
             }
             else
             {
                 Console.WriteLine("Student nije pronađen.");
             }
         }
+        }
 
         static double IzracunajProsjekSvih()
         {
-            // Izračunavanje ukupnog prosjeka svih ocjena
             int suma = 0;
             int brojOcjena = 0;
 
