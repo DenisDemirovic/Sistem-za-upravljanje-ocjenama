@@ -4,12 +4,13 @@ OPIS:
 Ova aplikacija je napravljena kao jednostavan program koji radi u konzoli i služi za vođenje evidencije o studentima i njihovim ocjenama.
 FUNKCIONALNOSTI:
 1.	Dodavanje novog studenta (ime, prezime, broj indeksa)
-2.	Dodavanje ocjena za određenog studenta
-3.	Prikaz svih studenata sa ocjenama
-4.	Izračunavanje i prikaz prosječne ocjene svakog studenta
-5.	Brisanje studenta iz sistema
-6.	Pretraga studenta po broju indeksa
-7.	Izlaz iz programa
+2.	Validacija unosa (ime i prezime ne mogu biti prazni, broj indeksa mora biti jedinstven)
+3.	Dodavanje ocjena za određenog studenta
+4.	Prikaz svih studenata sa ocjenama
+5.	Izračunavanje i prikaz prosječne ocjene svakog studenta
+6.	Brisanje studenta iz sistema
+7.	Pretraga studenta po broju indeksa
+8.	Izlaz iz programa
 
 TEHNOLOGIJE:
 -	C# programski jezik (.NET Console Application)
@@ -18,7 +19,7 @@ TEHNOLOGIJE:
 KORIŠTENI KONCEPTI:
 -	Klase i objekti
 -	Liste (List<Student>)
--	Petlje i uslovi (while, if, switch)
+-	Petlje i uslovi (while, foreach, switch)
 -	Funkcije (metode za dodavanje, brisanje, pretragu)
 
 POKRETANJE APLIKACIJE:
